@@ -20,6 +20,6 @@ def insert_event(data_df, description_text=""):
                 "description": f'{description_text} {row["description"]}',
                 "start": {"dateTime": start_date.isoformat(), "timeZone": "Europe/Warsaw"},
                 "end": {"dateTime": end_date.isoformat(), "timeZone": "Europe/Warsaw"},
-                "attendees": ATTENDEES,
+                # "attendees": ATTENDEES,
             },
         ).execute()

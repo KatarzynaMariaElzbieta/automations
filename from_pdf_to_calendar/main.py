@@ -7,7 +7,7 @@ from insert_event_to_calendar import insert_event
 from list_events import select_to_remove
 from remove_old_events import remove_events
 
-from from_pdf_to_calendar.const_config import COLUMNS_NAMES
+from const_config import COLUMNS_NAMES
 
 
 def get_file():

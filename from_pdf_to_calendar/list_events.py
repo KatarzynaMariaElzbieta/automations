@@ -1,10 +1,10 @@
 import datetime
+import logging
 
 from cal_setup import get_calendar_service
-from const_config import CALENDAR_ID
 
 
-def select_to_remove():
+def select_to_remove(calendar_id):
     """
     Function retrieves existing events in calendar for deletion.
     :return: list of events to be removed.
@@ -13,16 +13,17 @@ def select_to_remove():
     now = datetime.datetime.utcnow().isoformat() + "Z"
     # 'Z' indicates UTC time
     events_result = (
-        service.events().list(calendarId=CALENDAR_ID, timeMin=now, singleEvents=True, orderBy="startTime").execute()
+        service.events().list(calendarId=calendar_id, timeMin=now,
+                              singleEvents=True, orderBy="startTime").execute()
     )
     events = events_result.get("items", [])
     to_remove = []
     if not events:
-        print("No upcoming events found.")
+        logging.info("No upcoming events found.")
     for event in events:
         if event["summary"].endswith("!"):
             service.events().update(
-                calendarId=CALENDAR_ID, eventId=event["id"], body={"summary": event["summary"] + "_old"}
+                calendarId=calendar_id, eventId=event["id"], body={"summary": event["summary"] + "_old"}
             )
         elif event["summary"].endswith("_old"):
             pass

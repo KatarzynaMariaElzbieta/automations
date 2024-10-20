@@ -1,8 +1,8 @@
 from cal_setup import get_calendar_service
-from const_config import ATTENDEES, CALENDAR_ID
+from const_config import ATTENDEES
 
 
-def insert_event(data_df, description_text=""):
+def insert_event(calendar_id, data_df, description_text=""):
     """
     Function to add events with data frame to the calendar
     :param data_df:data frame with event data
@@ -13,7 +13,7 @@ def insert_event(data_df, description_text=""):
         start_date = row["start_date"]
         end_date = row["end_date"]
         service.events().insert(
-            calendarId=CALENDAR_ID,
+            calendarId=calendar_id,
             body={
                 "summary": row["summary"],
                 "location": row["location"],

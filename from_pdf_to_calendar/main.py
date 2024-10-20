@@ -35,7 +35,7 @@ def prepare_data(df):
     df["end_date"] = pd.to_datetime(df["end_date"], format="%d.%m.%Y %H:%M")
     df = df[df["Grupa"].isin(["G", "GR2"])]
     df = df[df["start_date"] > datetime.datetime.now()]
-    df = df.rename(COLUMNS_NAMES)
+    df = df.rename(columns=COLUMNS_NAMES)
     return df
 
 

@@ -1,3 +1,4 @@
+import logging
 import os.path
 import pickle
 
@@ -21,7 +22,9 @@ def get_calendar_service():
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
+        logging.error('not creds or not valid')
         if creds and creds.expired and creds.refresh_token:
+            logging.info('refresh')
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
